@@ -1,8 +1,9 @@
 import React from "react";
-import { setStatic } from "recompose";
 import { FlatList } from "react-native";
-import { Container, H1 } from "native-base";
+import { Container, H1, Button, Icon } from "native-base";
+import { setStatic, compose, withHandlers } from "recompose";
 
+import Header from "../../components/header/header";
 import ListCard from "../../components/list-card/list-card";
 
 const data = [
@@ -18,17 +19,28 @@ const data = [
   }
 ];
 
-const enhance = setStatic("navigationOptions", () => ({
-  title: "Home"
-}));
+const enhance = withHandlers({
+  goToList: ({ navigation }) => () => {
+    navigation.navigate("List");
+  },
+  goToListCreate: ({ navigation }) => () => {
+    navigation.navigate("ListCreate");
+  }
+});
 
-export default enhance(({ navigation }) => (
+export default enhance(({ goToListCreate, goToList }) => (
   <Container>
+    <Header
+      title="Home"
+      right={() => (
+        <Button transparent onPress={goToListCreate}>
+          <Icon name="add" style={{ fontSize: 35 }} />
+        </Button>
+      )}
+    />
     <FlatList
       data={data}
-      renderItem={({ item }) => (
-        <ListCard {...item} onPress={() => navigation.navigate("List")} />
-      )}
+      renderItem={({ item }) => <ListCard {...item} onPress={goToList} />}
     />
   </Container>
 ));

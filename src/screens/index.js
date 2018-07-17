@@ -6,10 +6,30 @@ import {
 
 import Home from "./home/home";
 import List from "./list/list";
+import ListCreate from "./list-create/list-create";
 
-export default createStackNavigator({
-  Tabs: createBottomTabNavigator({
-    Home
-  }),
-  List
-});
+const MainStack = createStackNavigator(
+  {
+    Tabs: createBottomTabNavigator({
+      Home
+    }),
+    List
+  },
+  {
+    headerMode: "none"
+  }
+);
+
+export default createStackNavigator(
+  {
+    Main: MainStack,
+    ListCreate
+  },
+  {
+    mode: "modal",
+    headerMode: "none",
+    navigationOptions: {
+      gesturesEnabled: false
+    }
+  }
+);
