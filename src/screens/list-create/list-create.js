@@ -1,11 +1,12 @@
-import React from "react";
-import { Container, Text } from "native-base";
+import { createStackNavigator } from "react-navigation";
 
-import Header from "../../components/header/header";
+import Step1 from "./step1";
 
-export default () => (
-  <Container>
-    <Header hasBack backType="close" title="List Create" />
-    <Text>Ola mundo</Text>
-  </Container>
+export default createStackNavigator(
+  {
+    Step1
+  },
+  {
+    headerMode: "none"
+  }
 );

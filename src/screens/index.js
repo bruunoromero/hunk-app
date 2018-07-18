@@ -7,6 +7,7 @@ import {
 import Home from "./home/home";
 import List from "./list/list";
 import ListCreate from "./list-create/list-create";
+import ItemCreate from "./item-create/item-create";
 
 const MainStack = createStackNavigator(
   {
@@ -23,7 +24,8 @@ const MainStack = createStackNavigator(
 export default createStackNavigator(
   {
     Main: MainStack,
-    ListCreate
+    ListCreate,
+    ItemCreate
   },
   {
     mode: "modal",
