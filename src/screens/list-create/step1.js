@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Button, Text } from "native-base";
 import { Platform, FlatList, View } from "react-native";
 import { SearchBar, ListItem } from "react-native-elements";
-import { compose, withStateHandlers, withState, withHandlers } from "recompose";
+import { compose, withState, withHandlers } from "recompose";
 
 import Navigation from "../../utils/navigation";
 import Header from "../../components/header/header";
@@ -34,13 +34,13 @@ const enhance = compose(
 
 export default enhance(
   ({
+    data,
+    select,
+    selecteds,
     searchText,
     navigation,
     setSearchText,
-    resetSearchText,
-    data,
-    select,
-    selecteds
+    resetSearchText
   }) => (
     <Container>
       <Header
