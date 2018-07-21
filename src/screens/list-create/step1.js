@@ -1,59 +1,78 @@
 import React from "react";
-import { Platform, View } from "react-native";
-import { Container, Text } from "native-base";
-import { SearchBar } from "react-native-elements";
-import { withHandlers, compose, lifecycle, withState } from "recompose";
+import { Container, Button, Text } from "native-base";
+import { Platform, FlatList, View } from "react-native";
+import { SearchBar, ListItem } from "react-native-elements";
+import { compose, withStateHandlers, withState, withHandlers } from "recompose";
 
+import Navigation from "../../utils/navigation";
 import Header from "../../components/header/header";
 
 const data = [
-  1337,
-  "janeway",
-  {
-    lots: "of",
-    different: {
-      types: 0,
-      data: false,
-      that: {
-        can: {
-          be: {
-            quite: {
-              complex: {
-                hidden: ["gold!"]
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  [4, 2, "tree"]
+  { title: "testaae", subtitle: "testee", key: "a" },
+  { title: "tesaste", subtitle: "testee", key: "b" }
 ];
-
-const enhance = compose(
-  withState("searchText", "setSearchText", ""),
-  withHandlers({
-    resetSearchText: ({ setSearchText }) => () => {
-      setSearchText("");
-    }
-  })
-);
 
 const platform = Platform.OS;
 
-export default enhance(({ setSearchText, resetSearchText, searchText }) => (
-  <Container>
-    <Header title="List Create" />
-    <SearchBar
-      lightTheme
-      value={searchText}
-      platform={platform}
-      onCancel={resetSearchText}
-      onChangeText={setSearchText}
-      icon={{ type: "font-awesome", name: "search" }}
-    />
-    <View>
-      <Text>{searchText}</Text>
-    </View>
-  </Container>
-));
+const enhance = compose(
+  withState("data", "setData", data),
+  withState("selecteds", "setSelecteds", []),
+  withState("searchText", "setSearchText", ""),
+  withHandlers({
+    select: ({ data, setSelecteds, selecteds }) => key => {
+      const isSelected = selecteds.some(selected => selected.key === key);
+      if (isSelected) return;
+
+      const select = data.find(item => item.key === key);
+      if (select) {
+        setSelecteds(selecteds.concat([select]));
+      }
+    },
+    resetSearchText: ({ setSearchText }) => () => setSearchText("")
+  })
+);
+
+export default enhance(
+  ({
+    searchText,
+    navigation,
+    setSearchText,
+    resetSearchText,
+    data,
+    select,
+    selecteds
+  }) => (
+    <Container>
+      <Header
+        title="List Create"
+        left={() => (
+          <Button transparent onPress={() => Navigation.goBack()}>
+            <Text>Cancelar</Text>
+          </Button>
+        )}
+        right={() => (
+          <Button transparent onPress={() => navigation.navigate("Step2")}>
+            <Text>Seguinte</Text>
+          </Button>
+        )}
+      />
+      <SearchBar
+        lightTheme
+        value={searchText}
+        platform={platform}
+        onCancel={resetSearchText}
+        onChangeText={setSearchText}
+        icon={{ type: "font-awesome", name: "search" }}
+      />
+      <View>
+        <Text>{selecteds.map(selected => selected.title).toString()}</Text>
+      </View>
+      <FlatList
+        data={data}
+        renderItem={({ item }) => (
+          <ListItem bottomDivider onPress={() => select(item.key)} {...item} />
+        )}
+      />
+    </Container>
+  )
+);

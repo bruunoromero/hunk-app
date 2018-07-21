@@ -1,7 +1,6 @@
-import React from "react";
 import {
-  createBottomTabNavigator,
-  createStackNavigator
+  createStackNavigator,
+  createBottomTabNavigator
 } from "react-navigation";
 
 import Home from "./home/home";
