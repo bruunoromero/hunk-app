@@ -4,8 +4,8 @@ import { Container, Button, Text } from "native-base";
 import { compose, withStateHandlers } from "recompose";
 import { SearchBar, ListItem } from "react-native-elements";
 
-import Navigation from "../../utils/navigation";
-import Header from "../../components/header/header";
+import Navigation from "../../../utils/navigation";
+import Header from "../../../components/header/header";
 
 const data = [
   { title: "teste", subtitle: "testee", key: "a" },

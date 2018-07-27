@@ -3,8 +3,8 @@ import { FlatList } from "react-native";
 import { Container, H1, Button, Icon } from "native-base";
 import { setStatic, compose, withHandlers } from "recompose";
 
-import Header from "../../components/header/header";
-import ListCard from "../../components/list-card/list-card";
+import Header from "../../../components/header/header";
+import ListCard from "../../../components/list-card/list-card";
 
 const data = [
   {

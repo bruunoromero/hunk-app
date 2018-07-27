@@ -4,8 +4,8 @@ import { Platform, FlatList, View } from "react-native";
 import { SearchBar, ListItem } from "react-native-elements";
 import { compose, withState, withHandlers } from "recompose";
 
-import Navigation from "../../utils/navigation";
-import Header from "../../components/header/header";
+import Navigation from "../../../utils/navigation";
+import Header from "../../../components/header/header";
 
 const data = [
   { title: "testaae", subtitle: "testee", key: "a" },

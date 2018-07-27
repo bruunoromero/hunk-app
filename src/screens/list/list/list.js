@@ -3,9 +3,9 @@ import { withHandlers } from "recompose";
 import { FlatList } from "react-native";
 import { Container } from "native-base";
 
-import Block from "../../components/block/block";
-import Header from "../../components/header/header";
-import ListItem from "../../components/list-item/list-item";
+import Block from "../../../components/block/block";
+import Header from "../../../components/header/header";
+import ListItem from "../../../components/list-item/list-item";
 
 const data = [{ key: "a", text: "Ola" }, { key: "b", text: "Mundo" }];
 

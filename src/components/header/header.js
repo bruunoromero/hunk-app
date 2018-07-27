@@ -46,7 +46,7 @@ export default enhance(
         {hasBack && (
           <Button onPress={back} transparent>
             <Icon name={backType === "arrow" ? "arrow-back" : "close"} />
-            <Text>Voltar</Text>
+            {backType === "arrow" && <Text>Voltar</Text>}
           </Button>
         )}
         {LeftComponent && <LeftComponent />}
